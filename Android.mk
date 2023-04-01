@@ -16,7 +16,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),slte)
+ifeq ($(TARGET_DEVICE),a3xelte)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 

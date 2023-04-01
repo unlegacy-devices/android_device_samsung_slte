@@ -1,59 +1,51 @@
-LOCAL_PATH := device/samsung/slte
+LOCAL_PATH := device/samsung/a3xelte
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := slte,sltexx
+TARGET_OTA_ASSERT_DEVICE := a3xelte,a3xeltexx
 
 # Platform
 BOARD_VENDOR := samsung
 TARGET_BOARD_PLATFORM := exynos5
 TARGET_SLSI_VARIANT := insignal
-TARGET_SOC := exynos5430
+TARGET_SOC := exynos7580
 
 # Architecture
-TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_SMP := true
-TARGET_CPU_VARIANT := cortex-a15
-ARCH_ARM_HAVE_TLS_REGISTER := true
+TARGET_BOARD_SUFFIX := _64
+TARGET_ARCH := arm64
+TARGET_ARCH_VARIANT := armv8-a
+TARGET_CPU_ABI := arm64-v8a
+TARGET_CPU_ABI2 :=
+TARGET_CPU_VARIANT := generic
+
+TARGET_2ND_ARCH := arm
+TARGET_2ND_ARCH_VARIANT := armv7-a-neon
+TARGET_2ND_CPU_ABI := armeabi-v7a
+TARGET_2ND_CPU_ABI2 := armeabi
+TARGET_2ND_CPU_VARIANT := cortex-a53
+TARGET_CPU_CORTEX_A53 := true
 #OVERRIDE_RS_DRIVER := libRSDriverArm.so
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := universal5430
+TARGET_BOOTLOADER_BOARD_NAME := universal7580
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
 # Partitions
-BOARD_BOOTIMAGE_PARTITION_SIZE := 10485760
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 12582912
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2401239040
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 28219277312
-#BOARD_USERDATAIMAGE_PARTITION_SIZE := 28324134912
-BOARD_CACHEIMAGE_PARTITION_SIZE := 314572800
-BOARD_FLASH_BLOCK_SIZE := 4096
+BOARD_BOOTIMAGE_PARTITION_SIZE := 29360128
+BOARD_CACHEIMAGE_PARTITION_SIZE := 104857600
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 35651584
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3145728000
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 13514047488
+BOARD_FLASH_BLOCK_SIZE := 131072
 
-# Kernel
-#TARGET_PREBUILT_KERNEL := device/samsung/slte/kernel
-TARGET_KERNEL_SOURCE := kernel/samsung/slte
-TARGET_KERNEL_CONFIG := cm_exynos5430-slte_defconfig
-BOARD_KERNEL_BASE := 0x10000000
-BOARD_KERNEL_PAGESIZE := 2048
-#BOARD_KERNEL_CMDLINE := The bootloader ignores the cmdline from the boot.img
-BOARD_KERNEL_SEPARATED_DT := false
-#BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/samsung/slte/dtb.img
-BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/mkbootimg.mk
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt out/target/product/$(TARGET_DEVICE)/dt.img
-
+BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --board SYSMAGIC000KU --dt $(DEVICE_PATH)/dt.img
+TARGET_KERNEL_CONFIG := cyanogenmod_a3xelte_defconfig
+TARGET_KERNEL_SOURCE := kernel/samsung/a3xelte
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
 # Audio
 BOARD_USES_LIBMEDIA_WITH_AUDIOPARAMETER := true
-#COMMON_GLOBAL_CFLAGS += -DSAMPLE_RATE_48K
-#AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
-#TARGET_HAVE_DYN_A2DP_SAMPLERATE := true
-#BOARD_USES_ALSA_AUDIO := true
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
@@ -100,7 +92,7 @@ BOARD_USES_HWC_SERVICES := true
 
 # Hardware
 BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
-BOARD_HARDWARE_CLASS += device/samsung/slte/cmhw
+BOARD_HARDWARE_CLASS += $(LOCAL_PATH)/cmhw
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
@@ -108,13 +100,9 @@ EXTENDED_FONT_FOOTPRINT := true
 # Init
 TARGET_NR_SVC_SUPP_GIDS := 20
 
-# Media
-#COMMON_GLOBAL_CFLAGS += -DWIDEVINE_PLUGIN_PRE_NOTIFY_ERROR
-#COMMON_GLOBAL_CFLAGS += -DTARGET_ENABLE_QC_AV_ENHANCEMENTS
-
 # Nfc
 BOARD_NFC_CHIPSET := pn547
-BOARD_NFC_HAL_SUFFIX := universal5430
+BOARD_NFC_HAL_SUFFIX := universal7580
 
 # OpenMAX Video
 BOARD_USE_ANB_OUTBUF_SHARE := true
@@ -143,25 +131,14 @@ TARGET_POWERHAL_VARIANT := slte
 # RIL
 BOARD_PROVIDES_LIBRIL := true
 BOARD_MODEM_TYPE := xmm7260
-BOARD_RIL_CLASS := ../../../device/samsung/slte/ril
+BOARD_RIL_CLASS := ../../../device/samsung/a3xelte/ril
 
 # Scaler
 BOARD_USES_SCALER := true
 
 # Selinux
 BOARD_SEPOLICY_DIRS := \
-	device/samsung/slte/sepolicy
-
-BOARD_SEPOLICY_UNION := \
-	app.te \
-	cpboot-daemon.te \
-	domain.te \
-	exyrngd.te \
-	file_contexts \
-	file.te \
-	macloader.te \
-	recovery.te \
-	ueventd.te
+	device/samsung/a3xelte/sepolicy
 
 # SurfaceFlinger
 BOARD_USES_SYNC_MODE_FOR_MEDIA := true
@@ -188,7 +165,7 @@ WIFI_DRIVER_FW_PATH_STA          := "/etc/wifi/bcmdhd_sta.bin"
 WIFI_DRIVER_FW_PATH_AP           := "/etc/wifi/bcmdhd_apsta.bin"
 
 # Recovery
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.universal5430
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.samsungexynos7580
 TARGET_RECOVERY_PIXEL_FORMAT := BRGA_8888
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
@@ -201,7 +178,7 @@ RECOVERY_SDCARD_ON_DATA := true
 
 # TWRP Recovery
 #TARGET_RECOVERY_DEVICE_MODULES += fstab.twrp
-#TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.twrp
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.twrp
 TW_THEME := portrait_mdpi
 TW_BRIGHTNESS_PATH := /sys/class/backlight/panel/brightness
 TW_MAX_BRIGHTNESS := 255
@@ -212,4 +189,4 @@ TW_INCLUDE_L_CRYPTO := true
 TW_NO_EXFAT_FUSE := true
 
 # inherit from the proprietary version
--include vendor/samsung/slte/BoardConfigVendor.mk
+-include vendor/samsung/a3xelte/BoardConfigVendor.mk

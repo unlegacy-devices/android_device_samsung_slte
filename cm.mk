@@ -1,4 +1,4 @@
-$(call inherit-product, device/samsung/slte/full_slte.mk)
+$(call inherit-product, device/samsung/a3xelte/full_a3xelte.mk)
 
 # Enhanced NFC
 $(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
@@ -6,11 +6,11 @@ $(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
-PRODUCT_NAME := cm_slte
-PRODUCT_DEVICE := slte
+PRODUCT_NAME := cm_a3xelte
+PRODUCT_DEVICE := a3xelte
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-	PRODUCT_NAME=sltexx \
-	TARGET_DEVICE=slte \
-	BUILD_FINGERPRINT=samsung/sltexx/slte:5.0.2/LRX22G/G850FXXU2COD4:user/release-keys \
-	PRIVATE_BUILD_DESC="sltexx-user 5.0.2 LRX22G G850FXXU2COD4 release-keys"
+	PRODUCT_NAME=a3xelte \
+	TARGET_DEVICE=a3xelte \
+	BUILD_FINGERPRINT=samsung/a3xeltexx/a3xelte:5.1.1/LMY47X/A310FXXU2APDC:user/release-keys \
+	PRIVATE_BUILD_DESC="a3xeltexx-user 5.1.1 LMY47X A310FXXU2APDC release-keys"

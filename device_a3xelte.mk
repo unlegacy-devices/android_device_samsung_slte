@@ -14,26 +14,23 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := device/samsung/slte
+LOCAL_PATH := device/samsung/a3xelte
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 # Ramdisk
-#TARGET_PROVIDES_INIT_RC := true
 PRODUCT_PACKAGES += \
-    fstab.universal5430 \
-    init.universal5430.rc \
-    init.universal5430.usb.rc \
-    init.universal5430.wifi.rc \
-    ueventd.universal5430.rc \
-    init.sec.boot.sh
-    #init.samsung.rc \
+    fstab.samsungexynos7580 \
+    init.samsungexynos7580.rc \
+    init.samsungexynos7580.usb.rc \
+    init.wifi.rc \
+    ueventd.samsungexynos7580.rc \
 
 # Recovery
 PRODUCT_PACKAGES += \
-    init.recovery.universal5430.rc
+    init.recovery.samsungexynos7580.rc
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -96,17 +93,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.nfc.sec_hal=true
 
-# Filesystem management tools
-#PRODUCT_PACKAGES += \
-#    make_ext4fs \
-#    e2fsck \
-#    setup_fs
-
 # RIL
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ril/bin/cbd:system/bin/cbd \
-    $(LOCAL_PATH)/ril/bin/cbd_44:system/bin/cbd_44 \
-    $(LOCAL_PATH)/ril/bin/cbd_50:system/bin/cbd_50 \
 
 PRODUCT_PACKAGES += \
     libsecril-client \
@@ -144,12 +133,8 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
-    audio.primary.universal5430 \
+    audio.primary.universal7580 \
     AudioWorkaround
-
-# Bluetooth
-#PRODUCT_COPY_FILES += \
-#    $(LOCAL_PATH)/bluetooth/bcm4350_prepatch.hcd:system/vendor/firmware/bcm4350_prepatch.hcd
 
 # Media profile
 PRODUCT_COPY_FILES += \
@@ -175,11 +160,7 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    power.universal5430
-
-# Lights
-PRODUCT_PACKAGES += \
-    lights.universal5430
+    power.universal7580
 
 # Gps
 PRODUCT_COPY_FILES += \
@@ -188,7 +169,7 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    camera.universal5430
+    camera.universal7580
 
 PRODUCT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1
@@ -201,7 +182,7 @@ PRODUCT_COPY_FILES += \
 
 # Keystore
 PRODUCT_PACKAGES += \
-    keystore.exynos5
+    keystore.exynos7580
 
 # Charger
 PRODUCT_PACKAGES += \
@@ -235,13 +216,9 @@ PRODUCT_PACKAGES += \
     libgdmcprov \
     mcDriverDaemon
 
-# Filesystem management tools
-#PRODUCT_PACKAGES += \
-#    fsck.f2fs \
-#    mkfs.f2fs
 
 # call dalvik heap config
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
 # call the proprietary setup
-$(call inherit-product-if-exists, vendor/samsung/slte/slte-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/a3xelte/a3xelte-vendor.mk)
